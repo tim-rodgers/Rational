@@ -39,10 +39,14 @@ class RationalTests: XCTestCase {
         XCTAssertEqual(lhs+rhs, resultAdd)
         lhs = Rational(numerator: 1, denominator: 2)
         rhs = Rational(numerator: 1, denominator: 2)
-        let resultMultiplication = Rational(numerator: 1, denominator: 4)
+        var resultMultiplication = Rational(numerator: 1, denominator: 4)
         let resultDivision = Rational(numerator: 1, denominator: 1)
         XCTAssertEqual(resultMultiplication, lhs*rhs)
         XCTAssertEqual(resultDivision, lhs/rhs)
+        lhs = Rational(numerator: 4, denominator: 2)
+        rhs = Rational(numerator: 1, denominator: 2)
+        resultMultiplication = Rational(fromDouble: 1)
+        XCTAssertEqual(resultMultiplication, lhs*rhs)
     }
     
     func testEquatable() {
