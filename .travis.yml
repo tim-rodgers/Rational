@@ -1,0 +1,7 @@
+language: objective-c
+osx_image: xcode8.3
+xcode_project: Rational.xcodeproj 
+xcode_scheme: Rational
+
+script:
+    - xcodebuild clean build -sdk iphonesimulator -project Rational.xcodeproj -scheme Rational CODE_SIGNING_REQUIRED=NO
