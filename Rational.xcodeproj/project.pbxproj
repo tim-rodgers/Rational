@@ -10,6 +10,7 @@
 		9E9ADFA81F4315C70099D415 /* Rational.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9ADF9E1F4315C70099D415 /* Rational.framework */; };
 		9E9ADFAD1F4315C70099D415 /* RationalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9ADFAC1F4315C70099D415 /* RationalTests.swift */; };
 		9E9ADFAF1F4315C70099D415 /* Rational.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E9ADFA11F4315C70099D415 /* Rational.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9E9ADFB91F4315DD0099D415 /* Rational.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9ADFB81F4315DD0099D415 /* Rational.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		9E9ADFA71F4315C70099D415 /* RationalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RationalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9ADFAC1F4315C70099D415 /* RationalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RationalTests.swift; sourceTree = "<group>"; };
 		9E9ADFAE1F4315C70099D415 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E9ADFB81F4315DD0099D415 /* Rational.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rational.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				9E9ADFA11F4315C70099D415 /* Rational.h */,
 				9E9ADFA21F4315C70099D415 /* Info.plist */,
+				9E9ADFB81F4315DD0099D415 /* Rational.swift */,
 			);
 			path = Rational;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 					9E9ADF9D1F4315C70099D415 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = D46R5H2T3J;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					9E9ADFA61F4315C70099D415 = {
@@ -198,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E9ADFB91F4315DD0099D415 /* Rational.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +329,7 @@
 		9E9ADFB31F4315C70099D415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = D46R5H2T3J;
@@ -336,6 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.timbles.Rational;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -343,6 +350,7 @@
 		9E9ADFB41F4315C70099D415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = D46R5H2T3J;
@@ -362,6 +370,7 @@
 		9E9ADFB61F4315C70099D415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = D46R5H2T3J;
 				INFOPLIST_FILE = RationalTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -374,6 +383,7 @@
 		9E9ADFB71F4315C70099D415 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = D46R5H2T3J;
 				INFOPLIST_FILE = RationalTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
