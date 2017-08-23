@@ -3,9 +3,9 @@ import os.log
 
 public struct Rational: Comparable, Equatable{
     
-    var numerator: Int
-    var denominator: Int
-    var reciprocal: Rational {
+    public var numerator: Int
+    public var denominator: Int
+    public var reciprocal: Rational {
         get {
             return Rational(numerator: self.denominator, denominator: self.numerator)
         }
@@ -136,7 +136,7 @@ extension Rational: CustomStringConvertible {
 //    return Rational(numerator: -1 * rational.numerator, denominator: rational.denominator)
 //}
 
-func + (lhs: Rational, rhs: Rational) -> Rational{
+public func + (lhs: Rational, rhs: Rational) -> Rational{
     let numerator = lhs.numerator*rhs.denominator + lhs.denominator*rhs.numerator
     let denominator = lhs.denominator*rhs.denominator
     let result = Rational(numerator: numerator, denominator: denominator)
@@ -150,20 +150,20 @@ public func - (lhs: Rational, rhs: Rational) -> Rational {
     return result
 }
 
-func * (lhs: Rational, rhs: Rational) -> Rational {
+public func * (lhs: Rational, rhs: Rational) -> Rational {
     let product = Rational(numerator: lhs.numerator * rhs.numerator, denominator: lhs.denominator * rhs.denominator)
     return product
 }
 
-func / (lhs: Rational, rhs: Rational) -> Rational {
+public func / (lhs: Rational, rhs: Rational) -> Rational {
     return lhs * rhs.reciprocal
 }
 
-func += (lhs: inout Rational, rhs: Rational) {
+public func += (lhs: inout Rational, rhs: Rational) {
     lhs = lhs + rhs
 }
 
-func -= (lhs: inout Rational, rhs: Rational) {
+public func -= (lhs: inout Rational, rhs: Rational) {
     
 }
 
