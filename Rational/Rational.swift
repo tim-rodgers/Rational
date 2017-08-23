@@ -11,13 +11,13 @@ public struct Rational: Comparable, Equatable{
         }
     }
     
-    init(numerator: Int, denominator: Int) {
+    public init(numerator: Int, denominator: Int) {
         let (numerator, denominator) = simplify(numerator: numerator, denominator: denominator)
         self.numerator = numerator
         self.denominator = denominator
     }
     
-    init(fromDouble value: Double) {
+    public init(fromDouble value: Double) {
         let error = 1.0E-6
         var h1 = 1.0
         var h2 = 0.0
