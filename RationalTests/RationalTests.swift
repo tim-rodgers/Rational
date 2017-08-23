@@ -21,54 +21,79 @@ class RationalTests: XCTestCase {
         super.tearDown()
     }
     
-    func testDecimal() {
-        var rational = Rational(fromDouble: 1.5)
+    func testDoubleToRationalPrecise() {
+        let rational = Rational(fromDouble: 1.5)
+        XCTAssertEqual([rational.numerator,rational.denominator], [3,2])
         XCTAssertEqual(rational.description, "1 1/2")
-        rational = Rational(fromDouble: 0.666667)
-        XCTAssertEqual(rational.description, "2/3")
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func testOperators() {
-        var lhs = Rational(numerator: 2, denominator: 3)
-        var rhs = Rational(numerator: 1, denominator: 3)
-        let resultMinus = Rational(numerator: 1, denominator: 3)
+    func testDoubleToRationalApproximate() {
+        let rational = Rational(fromDouble: 0.666667)
+        XCTAssertEqual([rational.numerator,rational.denominator], [2,3])
+        XCTAssertEqual(rational.description, "2/3")
+    }
+    
+    func testAddTwoRational() {
+        let lhs = Rational(numerator: 2, denominator: 3)
+        let rhs = Rational(numerator: 1, denominator: 3)
+        let resultAdd = Rational(numerator: 3, denominator: 3)
+        XCTAssertEqual(lhs+rhs, resultAdd)
+    }
+    
+    func testSubtractTwoRational() {
+        let lhs = Rational(numerator: 2, denominator: 3)
+        let rhs = Rational(numerator: 1, denominator: 3)
         let resultAdd = Rational(numerator: 3, denominator: 3)
         XCTAssertEqual(lhs-rhs, resultMinus)
-        XCTAssertEqual(lhs+rhs, resultAdd)
-        lhs = Rational(numerator: 1, denominator: 2)
-        rhs = Rational(numerator: 1, denominator: 2)
+    }
+    
+    func testMultiplyTwoRational() {
+        let lhs = Rational(numerator: 1, denominator: 2)
+       let  rhs = Rational(numerator: 1, denominator: 2)
         var resultMultiplication = Rational(numerator: 1, denominator: 4)
+        XCTAssertEqual(resultMultiplication, lhs*rhs)
+    }
+    
+    func testDivideTwoRational() {
+        let lhs = Rational(numerator: 1, denominator: 2)
+        let rhs = Rational(numerator: 1, denominator: 2)
         let resultDivision = Rational(numerator: 1, denominator: 1)
-        XCTAssertEqual(resultMultiplication, lhs*rhs)
         XCTAssertEqual(resultDivision, lhs/rhs)
-        lhs = Rational(numerator: 4, denominator: 2)
-        rhs = Rational(numerator: 1, denominator: 2)
-        resultMultiplication = Rational(fromDouble: 1)
-        XCTAssertEqual(resultMultiplication, lhs*rhs)
     }
     
-    func testEquatable() {
+    func testEqualSameRational() {
         let lhs = Rational(numerator: 2, denominator: 3)
-        var rhs = Rational(numerator: 2, denominator: 3)
-        XCTAssertEqual(lhs, rhs)
-        rhs = Rational(numerator: 4, denominator: 6)
+        let rhs = Rational(numerator: 2, denominator: 3)
         XCTAssertEqual(lhs, rhs)
     }
     
-    func testComparable() {
-        var lhs = Rational(numerator: 6, denominator: 3)
-        var rhs = Rational(numerator: 2, denominator: 3)
-        XCTAssertGreaterThan(lhs, rhs)
-        lhs = Rational(numerator: 1, denominator: 3)
-        rhs = Rational(numerator: 2, denominator: 3)
+    func testEqualDifferentRational() {
+        let lhs = Rational(numerator: 2, denominator: 3)
+        let rhs = Rational(numerator: 4, denominator: 6)
+        XCTAssertEqual(lhs, rhs)
+    }
+    
+    func testLessThan() {
+        let lhs = Rational(numerator: 1, denominator: 3)
+        let rhs = Rational(numerator: 2, denominator: 3)
         XCTAssertLessThan(lhs, rhs)
-        lhs = Rational(numerator: 1, denominator: 3)
-        rhs = Rational(numerator: 2, denominator: 6)
+    }
+    
+    func testGreaterThan() {
+        let lhs = Rational(numerator: 6, denominator: 3)
+        vlet rhs = Rational(numerator: 2, denominator: 3)
+        XCTAssertGreaterThan(lhs, rhs)
+    }
+    
+    func testLessEqual() {
+        let lhs = Rational(numerator: 1, denominator: 3)
+        let rhs = Rational(numerator: 2, denominator: 6)
         XCTAssertLessThanOrEqual(lhs, rhs)
-        lhs = Rational(numerator: 7, denominator: 8)
-        rhs = Rational(numerator: 3, denominator: 4)
+    }
+    
+    func testGreaterEqual() {
+        let lhs = Rational(numerator: 7, denominator: 8)
+        let rhs = Rational(numerator: 3, denominator: 4)
         XCTAssertGreaterThanOrEqual(lhs, rhs)
     }
     
