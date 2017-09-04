@@ -17,7 +17,7 @@ public struct Rational: Comparable, Equatable{
         self.denominator = denominator
     }
     
-    public init(fromDouble value: Double) {
+    public init(_ value: Double) {
         let error = 1.0E-6
         var h1 = 1.0
         var h2 = 0.0
@@ -41,30 +41,21 @@ public struct Rational: Comparable, Equatable{
         self.denominator = denominator
     }
     
-    public func multiply(by rational: Rational) {
-        var newRational = self
-        if self.denominator == 0 || rational.denominator == 0 {
-            //            os_log("Attempted to multiply with an invalid rational", log: .default, type: .debug)
-            return
-        }
-        newRational.numerator = self.numerator * rational.numerator
-        newRational.denominator = self.denominator * rational.denominator
+    public init(_ value: Int) {
+        self.numerator = value
+        self.denominator = 1
     }
     
-    public func asDouble() -> Double {
-        return Double(self.numerator) / Double(self.denominator)
-    }
-    
-    public static func fromString(_ string: String) -> Rational?{
-        if string.rangeOfCharacter(from: CharacterSet.letters) != nil {
+    public init?(fromString fractionString: String) {
+        if fractionString.rangeOfCharacter(from: CharacterSet.letters) != nil {
             return nil
         }
         
-        if string.contains("-") {
+        if fractionString.contains("-") {
             return nil
         }
         
-        let stringComponents = string.trimmingCharacters(in: .whitespaces).components(separatedBy: " ")
+        let stringComponents = fractionString.trimmingCharacters(in: .whitespaces).components(separatedBy: " ")
         if stringComponents.count == 2 {
             // expecting a whole number and fraction
             if stringComponents[0].contains("/") || stringComponents[0].contains(".") || stringComponents[1].contains(".") || !stringComponents[1].contains("/"){
@@ -74,23 +65,50 @@ public struct Rational: Comparable, Equatable{
             let wholeNumber = Int(stringComponents[0])
             let fraction = stringComponents[1].components(separatedBy: "/")
             if let denominator = Int(fraction[1]), let numerator = Int(fraction[0]) {
-                return Rational(numerator: numerator+(wholeNumber!*denominator), denominator: denominator)
+                self.init(numerator: numerator+(wholeNumber!*denominator), denominator: denominator)
+                return
             }
             
         } else if stringComponents.count == 1 {
             // expecting either a whole number or fraction
             if let decimalValue = Double(stringComponents[0]) {
-                return Rational(fromDouble: decimalValue)
+                self.init(decimalValue)
             } else {
                 let fraction = stringComponents[0].components(separatedBy: "/")
                 if fraction.count == 2 && !fraction[0].contains(".") && !fraction[1].contains("."){
                     if let numerator = Int(fraction[0]), let denominator = Int(fraction[1]) {
-                        return Rational(numerator: numerator, denominator: denominator)
+                        self.init(numerator: numerator, denominator: denominator)
+                        return
                     }
                 }
             }
         }
         return nil
+    }
+    
+    public func asDouble() -> Double {
+        return Double(self.numerator) / Double(self.denominator)
+    }
+    
+    public func asMixedString() -> String{
+        if numerator == 0 || denominator == 0 {
+            return "0"
+        }
+        if numerator < denominator {
+            return "\(numerator)/\(denominator)"
+        } else {
+            let whole = numerator / denominator
+            let remainder = numerator % denominator
+            
+            var descriptionString = ""
+            if whole > 0 {
+                descriptionString.append("\(whole.description) ")
+            }
+            if remainder > 0 {
+                descriptionString.append("\(remainder)/\(denominator)")
+            }
+            return descriptionString
+    }
     }
 }
 
@@ -109,25 +127,12 @@ private func simplify(numerator: Int, denominator: Int) -> (numerator: Int, deno
 }
 
 extension Rational: CustomStringConvertible {
+    
     public var description: String {
         if numerator == 0 || denominator == 0 {
             return "0"
         }
-        if numerator < denominator {
-            return "\(numerator)/\(denominator)"
-        } else {
-            let whole = numerator / denominator
-            let remainder = numerator % denominator
-            
-            var descriptionString = ""
-            if whole > 0 {
-                descriptionString.append("\(whole.description) ")
-            }
-            if remainder > 0 {
-                descriptionString.append("\(remainder)/\(denominator)")
-            }
-            return descriptionString
-        }
+        return "\(self.numerator)/\(self.denominator)"
     }
 }
 

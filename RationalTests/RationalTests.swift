@@ -22,15 +22,60 @@ class RationalTests: XCTestCase {
     }
     
     func testDoubleToRationalPrecise() {
-        let rational = Rational(fromDouble: 1.5)
+        let rational = Rational(1.5)
         XCTAssertEqual([rational.numerator,rational.denominator], [3,2])
-        XCTAssertEqual(rational.description, "1 1/2")
+        XCTAssertEqual(rational.description, "3/2")
     }
     
     func testDoubleToRationalApproximate() {
-        let rational = Rational(fromDouble: 0.666667)
+        let rational = Rational(0.666667)
         XCTAssertEqual([rational.numerator,rational.denominator], [2,3])
         XCTAssertEqual(rational.description, "2/3")
+    }
+    
+    func testStringToRational() {
+        let fraction = "1/2"
+        let rational = Rational(fromString: fraction)
+        XCTAssertEqual(rational?.description, "1/2")
+    }
+    
+    func testStringToRationalBlank() {
+        let fraction = ""
+        XCTAssertNil(Rational(fromString: fraction))
+    }
+    
+    func testStringToRationalText() {
+        let fraction = "blah"
+        XCTAssertNil(Rational(fromString: fraction))
+    }
+    
+    func testStringToRationalInvalid() {
+        let fraction = "1/g"
+        XCTAssertNil(Rational(fromString: fraction))
+    }
+    
+    func testStringToRationalTopHeavy() {
+        let fraction = "3/2"
+        let rational = Rational(fromString: fraction)!
+        XCTAssertEqual([rational.numerator,rational.denominator], [3,2])
+        XCTAssertEqual(rational.description, "3/2")
+    }
+    
+    func testStringToRationalWithWholeNumber() {
+        let fraction = "1 1/2"
+        let rational = Rational(fromString: fraction)!
+        XCTAssertEqual([rational.numerator,rational.denominator], [3,2])
+        XCTAssertEqual(rational.description, "3/2")
+    }
+    
+    func testMixedString() {
+        let rational = Rational(0.5)
+        XCTAssertEqual(rational.asMixedString(), "1/2")
+    }
+    
+    func testMixedStringTopHeavy() {
+        let rational = Rational(1.5)
+        XCTAssertEqual(rational.asMixedString(), "1 1/2")
     }
     
     func testAddTwoRational() {
@@ -43,14 +88,14 @@ class RationalTests: XCTestCase {
     func testSubtractTwoRational() {
         let lhs = Rational(numerator: 2, denominator: 3)
         let rhs = Rational(numerator: 1, denominator: 3)
-        let resultAdd = Rational(numerator: 3, denominator: 3)
+        let resultMinus = Rational(numerator: 1, denominator: 3)
         XCTAssertEqual(lhs-rhs, resultMinus)
     }
     
     func testMultiplyTwoRational() {
         let lhs = Rational(numerator: 1, denominator: 2)
-       let  rhs = Rational(numerator: 1, denominator: 2)
-        var resultMultiplication = Rational(numerator: 1, denominator: 4)
+        let rhs = Rational(numerator: 1, denominator: 2)
+        let resultMultiplication = Rational(numerator: 1, denominator: 4)
         XCTAssertEqual(resultMultiplication, lhs*rhs)
     }
     
@@ -81,7 +126,7 @@ class RationalTests: XCTestCase {
     
     func testGreaterThan() {
         let lhs = Rational(numerator: 6, denominator: 3)
-        vlet rhs = Rational(numerator: 2, denominator: 3)
+        let rhs = Rational(numerator: 2, denominator: 3)
         XCTAssertGreaterThan(lhs, rhs)
     }
     
@@ -95,13 +140,6 @@ class RationalTests: XCTestCase {
         let lhs = Rational(numerator: 7, denominator: 8)
         let rhs = Rational(numerator: 3, denominator: 4)
         XCTAssertGreaterThanOrEqual(lhs, rhs)
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
     
 }
